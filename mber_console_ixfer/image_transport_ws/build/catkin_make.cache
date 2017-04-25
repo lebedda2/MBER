@@ -1,0 +1,2 @@
+image_transport_tutorial
+-DCATKIN_DEVEL_PREFIX=/home/nate/Documents/image_transport_ws/devel -DCMAKE_INSTALL_PREFIX=/home/nate/Documents/image_transport_ws/install -G Unix Makefiles
