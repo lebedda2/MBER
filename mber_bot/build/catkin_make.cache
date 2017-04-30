@@ -1,2 +1,0 @@
-
--DCATKIN_DEVEL_PREFIX=/home/mber/MBER/mber_bot/devel -DCMAKE_INSTALL_PREFIX=/home/mber/MBER/mber_bot/install -G Unix Makefiles
