@@ -6,11 +6,9 @@
 
 int main(int argc, char **argv)
 {
-  ros::init(argc, argv, "mber_bot_sensors");
+  ros::init(argc, argv, "mber_console_motor");
   ros::NodeHandle n;
-  ros::Publisher sensor_publish_CO2 = n.advertise<std_msgs::String>("mber_sensors_CO2", 1000);
-  ros::Publisher sensor_publish_radiation = n.advertise<std_msgs::String>("mber_sensors_radiation", 1000);
-  ros::Publisher sensor_publish_temperature = n.advertise<std_msgs::String>("mber_sensors_temperature", 1000);
+  ros::Publisher chatter_pub = n.advertise<std_msgs::String>("rc_motor_ctrl", 1000);
   ros::Rate loop_rate(10);
   int count = 0;
   while (ros::ok()) {
@@ -22,7 +20,7 @@ int main(int argc, char **argv)
 
     ROS_INFO("%s", msg.data.c_str());
 
-    //chatter_pub.publish(msg);
+    chatter_pub.publish(msg);
 
     ros::spinOnce();
 

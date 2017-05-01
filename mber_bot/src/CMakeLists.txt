@@ -22,6 +22,7 @@ endmacro()
 
 foreach(dir
       sensor_array
+      motor_control
     )
   mberbot_make(${dir})
 endforeach()
