@@ -98,6 +98,7 @@ void TeleopMBER::keyLoop(){
     }
     if(dirty ==true) {
       motor_msg.data = ss.str();
+      ROS_INFO("MBER CONSOLE: %s", motor_msg.data.c_str());
       mber_motor_ctrl.publish(motor_msg);    
       dirty=false;
     }
