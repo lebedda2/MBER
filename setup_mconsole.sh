@@ -12,3 +12,8 @@ sleep 5
 source devel/setup.bash
 rosparam set /compressed_listener/image_transport compressed
 rosrun image_transport_tutorial my_subscriber __name:=compressed_listener
+
+# Maybe do this manually?
+rqt_plot /mber_sensors_temperature
+rqt_plot /mber_sensors_radiation
+rqt_plot /mber_sensors_CO2
