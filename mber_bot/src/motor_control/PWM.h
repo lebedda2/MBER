@@ -17,4 +17,4 @@ int setPeriod(PWM_CHAN pwm, unsigned long period);
 int setDutyCycle(PWM_CHAN pwm, unsigned long dutyCycle);
 int setPolarity(PWM_CHAN pwm, POLARITY polarity);
 
-#endif PWM_H_
+#endif

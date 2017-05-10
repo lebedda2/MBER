@@ -1,5 +1,6 @@
 #include "ros/ros.h"
 #include "std_msgs/String.h"
+#include "PWM.h"
 
 const unsigned long CENTER = 1500000;
 const unsigned long RANGE = 1000000;
@@ -68,7 +69,7 @@ int main(int argc, char **argv)
 	setDutyCycle(PWM1B, CENTER);
   
 	ros::NodeHandle n_motor_ctrl;
-	ros::Subscriber motor_sub = n.subscribe("rc_motor_ctrl", 1000, updateMotors);
+	ros::Subscriber motor_sub = n_motor_ctrl.subscribe("rc_motor_ctrl", 1000, updateMotors);
 	ros::spin();
   
 	return 0;
