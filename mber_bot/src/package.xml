@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package>
   <name>mber_bot</name>
-  <version>0.8.0</version>
+  <version>0.1.0</version>
   <description>
-    NYI
+    This is the source folder for the mber robot code.  Included are packages to control sensors/motors.
   </description>
   <maintainer email="lebedda2@umbc.edu">Nate Lebedda</maintainer>
   <license>BSD</license>
