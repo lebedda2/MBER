@@ -1,6 +1,8 @@
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 #include "PWM.h"
+#include <unistd.h>
+
 
 const unsigned long CENTER = 1500000;
 const unsigned long RANGE = 1000000;
@@ -9,6 +11,9 @@ using namespace std;
 
 // Left Motor is P9.14 - PWM1A
 // Right Motor is P9.16 - PWM1B
+
+float leftSpeed;
+float rightSpeed;
 
 unsigned long convertSpeedToDC(float speed)
 {
@@ -23,28 +28,26 @@ unsigned long convertSpeedToDC(float speed)
 
 void updateMotors(const std_msgs::String::ConstPtr& msg)
 {
-	float leftSpeed;
-	float rightSpeed;
-	
+	ROS_INFO("Got Here");
 	if (strcmp("U", msg->data.c_str()) == 0) // Go Forward
 	{
-		leftSpeed = 0.8;
-		rightSpeed = -0.8;
+		leftSpeed = 0.2;
+		rightSpeed = -0.2;
 	}
 	else if (strcmp("D", msg->data.c_str()) == 0) // Go Backwards
 	{
-		leftSpeed = -0.8;
-		rightSpeed = 0.8;
+		leftSpeed = -0.2;
+		rightSpeed = 0.2;
 	}
 	else if (strcmp("L", msg->data.c_str()) == 0) // Go Left
 	{
-		leftSpeed = 0.3;
-		rightSpeed = -0.8;
+		leftSpeed = 0.1;
+		rightSpeed = 0.2;
 	}
 	else if (strcmp("R", msg->data.c_str()) == 0) // Go Right
 	{
-		leftSpeed = 0.8;
-		rightSpeed = -0.3;
+		leftSpeed = 0.2;
+		rightSpeed = 0.1;
 	}
 	else // Stop
 	{
@@ -67,10 +70,10 @@ int main(int argc, char **argv)
 	setPeriod(PWM1B, 20000000);
 	setDutyCycle(PWM1A, CENTER);
 	setDutyCycle(PWM1B, CENTER);
-  
+
 	ros::NodeHandle n_motor_ctrl;
 	ros::Subscriber motor_sub = n_motor_ctrl.subscribe("rc_motor_ctrl", 1000, updateMotors);
 	ros::spin();
-  
+
 	return 0;
 }
