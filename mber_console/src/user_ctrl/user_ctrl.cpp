@@ -5,10 +5,12 @@
 #include <termios.h>
 #include <stdio.h>
 
+#define KEY_CODE_SPACE 0x20
 #define KEY_CODE_R 0x43
 #define KEY_CODE_L 0x44
 #define KEY_CODE_U 0x41
 #define KEY_CODE_D 0x42
+#define KEY_CODE_Q 0x71
 
 class TeleopMBER {
   public:
@@ -26,19 +28,19 @@ TeleopMBER::TeleopMBER () {
 int kfd = 0;
 struct termios cooked;
 struct termios raw;
-/*
+
 void quit(int sig) {
   (void)sig;
   tcsetattr(kfd, TCSANOW, &cooked);
   ros::shutdown();
   exit(0);
 }
-*/
+
 int main(int argc, char **argv) {
   ros::init(argc, argv, "teleop_mconsole");
   TeleopMBER teleopMBER;
 
-  //signal(SIGINT, quit);
+  signal(SIGINT, quit);
   teleopMBER.keyLoop();
 
   return(0);
@@ -95,13 +97,20 @@ void TeleopMBER::keyLoop(){
         ss << "D";
         dirty = true;
         break;
+      case KEY_CODE_SPACE:
+        ROS_DEBUG("STOP");
+        ss << "N";
+        dirty = true;
+        break;
     }
     if(dirty ==true) {
       motor_msg.data = ss.str();
       ROS_INFO("MBER CONSOLE: %s", motor_msg.data.c_str());
       mber_motor_ctrl.publish(motor_msg);    
       dirty=false;
+      usleep(100000);
     }
+
   }
 
 
