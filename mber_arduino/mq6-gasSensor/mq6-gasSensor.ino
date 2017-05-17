@@ -7,7 +7,7 @@ www.circuits4you.com
 #include <Wire.h>
 #include "I2C_16.h"
 
-#define MQ6_VOBJ  0x00
+#define MQ6_VOBJ 0x00
 #define MQ6_TAMB 0x01
 #define MQ6_CONFIG 0x02
 
@@ -82,7 +82,14 @@ void loop()
    raw_data = MQGetGasPercentage(MQRead(MQ_PIN)/Ro,GAS_CH4);
    mq6_data = (uint32_t)raw_data;
    to_i2c = (uint16_t)mq6_data;
-   write16(sensor2, MQ6_TAMB, to_i2c);
+   Serial.print("\n");
+   Serial.print("I am to_i2c: ");
+   Serial.print(to_i2c);
+   Serial.print("\n");
+   Serial.print("I am MQ6_VOBJ: ");
+   Serial.print(MQ6_VOBJ);
+   Serial.print("\n");
+   write16(sensor2, MQ6_VOBJ, to_i2c);
    Serial.print(" - ");
    Serial.print(to_i2c);
    Serial.print( "ppm" );
