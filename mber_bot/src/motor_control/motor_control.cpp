@@ -31,32 +31,32 @@ void updateMotors(const std_msgs::String::ConstPtr& msg)
 	ROS_INFO("Got Here");
 	if (strcmp("U", msg->data.c_str()) == 0) // Go Forward
 	{
-		leftSpeed = 0.2;
-		rightSpeed = -0.2;
+		leftSpeed = 0.8;
+		rightSpeed = -0.8;
 	}
 	else if (strcmp("D", msg->data.c_str()) == 0) // Go Backwards
 	{
-		leftSpeed = -0.2;
-		rightSpeed = 0.2;
+		leftSpeed = -0.8;
+		rightSpeed = 0.8;
 	}
 	else if (strcmp("L", msg->data.c_str()) == 0) // Go Left
 	{
 		leftSpeed = 0.1;
-		rightSpeed = 0.2;
+		rightSpeed = -0.8;
 	}
 	else if (strcmp("R", msg->data.c_str()) == 0) // Go Right
 	{
-		leftSpeed = 0.2;
-		rightSpeed = 0.1;
+		leftSpeed = 0.8;
+		rightSpeed = -0.1;
 	}
 	else // Stop
 	{
-		leftSpeed = 0.0;
-		rightSpeed = 0.0;
+		leftSpeed = 0;
+		rightSpeed = 0;
 	}
 
 	setDutyCycle(PWM1A, convertSpeedToDC(leftSpeed));
-	setDutyCycle(PWM1B, convertSpeedToDC(leftSpeed));
+	setDutyCycle(PWM1B, convertSpeedToDC(rightSpeed));
 }
 
 int main(int argc, char **argv)
